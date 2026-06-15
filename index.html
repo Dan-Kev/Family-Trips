@@ -37,27 +37,14 @@ header {
 }
 
 header h1 {
-    color: white;
-    background: rgba(0,0,0,.5);
-    padding: 15px 25px;
-    border-radius: 10px;
+    display: none;
 }
 
-.stats {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    padding: 20px;
-}
-
-.stat {
-    background: var(--card);
-    padding: 15px;
-    border-radius: 12px;
-    min-width: 120px;
+.title {
     text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,.1);
+    font-size: 32px;
+    font-weight: bold;
+    padding: 20px 10px;
 }
 
 .container {
@@ -119,24 +106,9 @@ footer {
 
 <body>
 
-<header>
-    <h1>Семейные Кемпинги</h1>
-</header>
+<header></header>
 
-<div class="stats">
-    <div class="stat">
-        <strong>8</strong><br>Походов
-    </div>
-    <div class="stat">
-        <strong>12450</strong><br>Фото
-    </div>
-    <div class="stat">
-        <strong>680</strong><br>Видео
-    </div>
-    <div class="stat">
-        <strong>10</strong><br>Участников
-    </div>
-</div>
+<div class="title">Семейные Кемпинги</div>
 
 <div class="container">
 
@@ -148,7 +120,7 @@ footer {
         <h2>Чаруши 2005</h2>
         <div class="meta">
             📅 Лето 2005<br>
-            📍 Кировская област,Фаленский район, урочище Чаруши <br>
+            📍 Кировская область, Фаленский район, урочище Чаруши <br>
             📷 5 фото • 🎥 0 видео
         </div>
         <p>Семейный поход на тракторе</p>
@@ -179,7 +151,7 @@ footer {
 </div>
 
 <footer>
-    © Семейный архив походов
+    © DanKev💗
 </footer>
 
 </body>
