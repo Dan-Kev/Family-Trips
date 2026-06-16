@@ -113,6 +113,7 @@ header {
     overflow: hidden;
     box-shadow: 0 3px 15px rgba(0,0,0,.15);
     transition: transform 0.2s, opacity 0.35s;
+    box-sizing: border-box;
 }
 
 .card:hover { transform: translateY(-4px); }
@@ -123,7 +124,7 @@ header {
     object-fit: cover;
 }
 
-.content { padding: 15px; }
+.content { padding: 15px; box-sizing: border-box; }
 
 .meta {
     color: gray;
@@ -133,44 +134,46 @@ header {
 /* ───── КНОПКИ АЛЬБОМА ───── */
 .card-actions {
     display: flex;
-    align-items: stretch;
-    gap: 6px;
+    flex-direction: column;
+    gap: 8px;
     margin-top: 14px;
 }
 
 .button {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    flex: 1;
-    min-width: 0;
-    padding: 10px 8px;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 14px;
     background: var(--accent);
     color: white;
     text-decoration: none;
     border-radius: 10px;
-    font-size: clamp(11px, 3.5vw, 14px);
+    font-size: 14px;
     font-weight: bold;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .button .btn-icon {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
     flex-shrink: 0;
+}
+
+.icon-btns {
+    display: flex;
+    gap: 8px;
 }
 
 .icon-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    min-width: 44px;
-    flex-shrink: 0;
+    flex: 1;
+    height: 40px;
     border-radius: 10px;
     border: 1.5px solid rgba(0,0,0,0.10);
     background: var(--card);
@@ -188,21 +191,6 @@ header {
     width: 24px;
     height: 24px;
     object-fit: contain;
-}
-
-/* На очень узких карточках (мобиль 2 колонки) — иконки чуть меньше */
-@media (max-width: 400px) {
-    .icon-btn {
-        width: 36px;
-        min-width: 36px;
-    }
-    .icon-btn img {
-        width: 20px;
-        height: 20px;
-    }
-    .button .btn-icon {
-        display: none;
-    }
 }
 
 footer {
@@ -248,12 +236,14 @@ footer {
                 <img class="btn-icon" src="11040.png" alt="Immich">
                 Открыть альбом
             </a>
-            <a class="icon-btn" href="#" title="Google Фото">
-                <img src="11046.png" alt="Google Фото">
-            </a>
-            <a class="icon-btn" href="#" title="Telegram">
-                <img src="11043.png" alt="Telegram">
-            </a>
+            <div class="icon-btns">
+                <a class="icon-btn" href="#" title="Google Фото">
+                    <img src="11046.png" alt="Google Фото">
+                </a>
+                <a class="icon-btn" href="#" title="Telegram">
+                    <img src="11043.png" alt="Telegram">
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -271,12 +261,14 @@ footer {
                 <img class="btn-icon" src="11040.png" alt="Immich">
                 Открыть альбом
             </a>
-            <a class="icon-btn" href="#" title="Google Фото">
-                <img src="11046.png" alt="Google Фото">
-            </a>
-            <a class="icon-btn" href="#" title="Telegram">
-                <img src="11043.png" alt="Telegram">
-            </a>
+            <div class="icon-btns">
+                <a class="icon-btn" href="#" title="Google Фото">
+                    <img src="11046.png" alt="Google Фото">
+                </a>
+                <a class="icon-btn" href="#" title="Telegram">
+                    <img src="11043.png" alt="Telegram">
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -295,12 +287,14 @@ footer {
                 <img class="btn-icon" src="11040.png" alt="Immich">
                 Открыть альбом
             </a>
-            <a class="icon-btn" href="#" title="Google Фото">
-                <img src="11046.png" alt="Google Фото">
-            </a>
-            <a class="icon-btn" href="#" title="Telegram">
-                <img src="11043.png" alt="Telegram">
-            </a>
+            <div class="icon-btns">
+                <a class="icon-btn" href="#" title="Google Фото">
+                    <img src="11046.png" alt="Google Фото">
+                </a>
+                <a class="icon-btn" href="#" title="Telegram">
+                    <img src="11043.png" alt="Telegram">
+                </a>
+            </div>
         </div>
     </div>
 </div>
