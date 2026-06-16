@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Семейные Кемпинги</title>
+
+<style>
+:root {
+    --bg: #f5f5f5;
+    --card: #ffffff;
+    --text: #222;
+    --accent: #2d6a4f;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #111;
+        --card: #1b1b1b;
+        --text: #f0f0f0;
+    }
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* ───── ЛИСТЬЯ ───── */
+#leaf-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+header {
+    background: url("header.jpg") center/cover;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 20px 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ───── СОРТИРОВКА ───── */
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.sort-btn {
+    padding: 9px 18px;
+    border: 2px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+    font-family: Arial, sans-serif;
+}
+
+.sort-btn:hover,
+.sort-btn.active {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* ───── СЕТКА ───── */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    transition: none;
+}
+
+@media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+
+.card {
+    background: var(--card);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 3px 15px rgba(0,0,0,.15);
+    transition: transform 0.2s, opacity 0.35s;
+}
+
+.card:hover { transform: translateY(-4px); }
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.content { padding: 15px; }
+
+.meta {
+    color: gray;
+    font-size: 14px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 16px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    opacity: .7;
+    position: relative;
+    z-index: 1;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Холст для листьев -->
+<canvas id="leaf-canvas"></canvas>
+
+<header></header>
+
+<div class="title">Семейные Кемпинги</div>
+
+<div class="container">
+
+<!-- Кнопки сортировки -->
+<div class="toolbar">
+    <button class="sort-btn active" data-sort="default">По умолчанию</button>
+    <button class="sort-btn" data-sort="newest">Сначала новые</button>
+    <button class="sort-btn" data-sort="oldest">Сначала старые</button>
+</div>
+
+<div class="grid" id="album-grid">
+
+<div class="card" data-year="2005">
+    <img src="cover1.jpg" alt="">
+    <div class="content">
+        <h2>Чаруши 2005</h2>
+        <div class="meta">
+            📅 Лето 2005<br>
+            📍 Кировская область, Фаленский район, деревня Чаруши<br>
+            📷 ? фото • 🎥 0 видео
+        </div>
+        <p>Семейный поход на тракторе</p>
+        <a class="button" href="http://178.141.247.198:2283/share/5MaBZ2kcqu_fl0pMOha7duNs0ZgAlGs1LM_VMT4_srdzZMwnRyOkRn5eKLBzm6L82i0">
+            Открыть альбом
+        </a>
+    </div>
+</div>
+
+<div class="card" data-year="2020">
+    <img src="cover2.jpg" alt="">
+    <div class="content">
+        <h2>Чуваши 2020</h2>
+        <div class="meta">
+            📅 14 Июня 2020<br>
+            📍 Кировская область, Фаленский район, урочище Чуваши<br>
+            📷 296 фото • 🎥 ? видео
+        </div>
+        <p>Семейный поход на тракторе</p>
+        <a class="button" href="http://178.141.247.198:2283/share/0J5RR7tm5z7Nh6pKbW_aiNyz_lkZiHpAQQJ_d13hZDD3GI_al33R2i7b0a4JRSuk7Y0">
+            Открыть альбом
+        </a>
+    </div>
+</div>
+
+<div class="card" data-year="2020">
+    <img src="cover3.jpg" alt="">
+    <div class="content">
+        <h2>3</h2>
+        <div class="meta">
+            📅 14 Июня 2020<br>
+            📍 Кировская область, Фаленский район, урочище Чуваши<br>
+            📷 296 фото • 🎥 ? видео
+        </div>
+        <p>Семейный поход на тракторе</p>
+        <a class="button" href="http://178.141.247.198:2283/share/0J5RR7tm5z7Nh6pKbW_aiNyz_lkZiHpAQQJ_d13hZDD3GI_al33R2i7b0a4JRSuk7Y0">
+            Открыть альбом
+        </a>
+    </div>
+</div>
+
+</div><!-- /grid -->
+</div><!-- /container -->
+
+<footer>
+    © Dan\/Kev💗
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════
+   ЛИСТЬЯ БЕРЁЗЫ — Canvas animation
+═══════════════════════════════════════════ */
+(function () {
+    const canvas = document.getElementById('leaf-canvas');
+    const ctx = canvas.getContext('2d');
+    const MAX_LEAVES = 22;
+    const leaves = [];
+
+    /* Цвета берёзовых листьев (светло-зелёные / осенние жёлтые) */
+    const COLORS = [
+        '#a8d568', '#b8dd72', '#c8e87a',
+        '#d4ee80', '#e2f590',
+        '#f0d060', '#e8c840', '#d4b030'
+    ];
+
+    function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    /* Рисуем берёзовый лист через кривые Безье */
+    function drawBirchLeaf(ctx, size) {
+        ctx.beginPath();
+        /* Форма: заострённый ромб, ближе к берёзе */
+        ctx.moveTo(0, -size);                          /* верхушка */
+        ctx.bezierCurveTo( size * 0.8, -size * 0.3,
+                            size * 0.9,  size * 0.3,
+                            0,           size);         /* правый край */
+        ctx.bezierCurveTo(-size * 0.9,  size * 0.3,
+                          -size * 0.8, -size * 0.3,
+                           0,          -size);          /* левый край */
+        ctx.closePath();
+
+        /* Прожилки */
+        ctx.moveTo(0, -size);
+        ctx.lineTo(0,  size);
+        for (let i = -0.6; i <= 0.6; i += 0.3) {
+            ctx.moveTo(0, size * i);
+            ctx.lineTo(size * 0.55, size * (i + 0.2));
+            ctx.moveTo(0, size * i);
+            ctx.lineTo(-size * 0.55, size * (i + 0.2));
+        }
+    }
+
+    function makeLeaf() {
+        return {
+            x:       Math.random() * canvas.width,
+            y:       -30 - Math.random() * 200,
+            size:    8 + Math.random() * 10,
+            color:   COLORS[Math.floor(Math.random() * COLORS.length)],
+            angle:   Math.random() * Math.PI * 2,
+            spinSpeed: (Math.random() - 0.5) * 0.04,
+            speedY:  0.6 + Math.random() * 1.0,
+            speedX:  (Math.random() - 0.5) * 0.8,
+            swing:   Math.random() * Math.PI * 2,
+            swingSpeed: 0.01 + Math.random() * 0.02,
+            swingAmp:   20 + Math.random() * 30,
+            opacity: 0.55 + Math.random() * 0.35,
+        };
+    }
+
+    /* Заполняем экран с самого начала */
+    for (let i = 0; i < MAX_LEAVES; i++) {
+        const l = makeLeaf();
+        l.y = Math.random() * window.innerHeight; /* стартуют по всей высоте */
+        leaves.push(l);
+    }
+
+    function tick() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = 0; i < leaves.length; i++) {
+            const l = leaves[i];
+
+            l.swing += l.swingSpeed;
+            l.x     += l.speedX + Math.sin(l.swing) * 0.6;
+            l.y     += l.speedY;
+            l.angle += l.spinSpeed;
+
+            /* Переносим упавший лист наверх */
+            if (l.y > canvas.height + 40) {
+                leaves[i] = makeLeaf();
+                continue;
+            }
+
+            ctx.save();
+            ctx.translate(l.x, l.y);
+            ctx.rotate(l.angle);
+            ctx.globalAlpha = l.opacity;
+
+            /* Заливка */
+            ctx.fillStyle = l.color;
+            drawBirchLeaf(ctx, l.size);
+            ctx.fill();
+
+            /* Прожилки */
+            ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+            ctx.lineWidth = 0.6;
+            drawBirchLeaf(ctx, l.size);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        requestAnimationFrame(tick);
+    }
+
+    /* Уважаем prefers-reduced-motion */
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        tick();
+    }
+})();
+
+
+/* ═══════════════════════════════════════════
+   СОРТИРОВКА АЛЬБОМОВ
+═══════════════════════════════════════════ */
+(function () {
+    const grid    = document.getElementById('album-grid');
+    const buttons = document.querySelectorAll('.sort-btn');
+
+    /* Запоминаем исходный порядок */
+    const originalOrder = Array.from(grid.querySelectorAll('.card'));
+
+    function sortCards(order) {
+        const cards = Array.from(grid.querySelectorAll('.card'));
+
+        cards.sort((a, b) => {
+            const ya = parseInt(a.dataset.year, 10);
+            const yb = parseInt(b.dataset.year, 10);
+            if (order === 'newest') return yb - ya;
+            if (order === 'oldest') return ya - yb;
+            return 0; /* default — восстановим из originalOrder */
+        });
+
+        /* При «по умолчанию» восстанавливаем оригинальный порядок */
+        const sorted = order === 'default' ? originalOrder : cards;
+
+        /* Анимированная замена */
+        grid.style.opacity = '0';
+        setTimeout(() => {
+            sorted.forEach(c => grid.appendChild(c));
+            grid.style.opacity = '1';
+        }, 200);
+    }
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            sortCards(btn.dataset.sort);
+        });
+    });
+
+    /* CSS-переход для плавного появления */
+    grid.style.transition = 'opacity 0.2s ease';
+})();
+</script>
+
+</body>
+</html>
