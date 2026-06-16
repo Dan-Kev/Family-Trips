@@ -130,14 +130,79 @@ header {
     font-size: 14px;
 }
 
+/* ───── КНОПКИ АЛЬБОМА ───── */
+.card-actions {
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+    margin-top: 14px;
+}
+
 .button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+    padding: 10px 8px;
     background: var(--accent);
     color: white;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 10px;
+    font-size: clamp(11px, 3.5vw, 14px);
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.button .btn-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    min-width: 44px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1.5px solid rgba(0,0,0,0.10);
+    background: var(--card);
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.icon-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.13);
+}
+
+.icon-btn img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* На очень узких карточках (мобиль 2 колонки) — иконки чуть меньше */
+@media (max-width: 400px) {
+    .icon-btn {
+        width: 36px;
+        min-width: 36px;
+    }
+    .icon-btn img {
+        width: 20px;
+        height: 20px;
+    }
+    .button .btn-icon {
+        display: none;
+    }
 }
 
 footer {
@@ -178,9 +243,18 @@ footer {
             📍 Кировская область, Фаленский район, деревня Чаруши
         </div>
         <p>Семейный поход на тракторе</p>
-        <a class="button" href="http://178.141.247.198:2283/share/5MaBZ2kcqu_fl0pMOha7duNs0ZgAlGs1LM_VMT4_srdzZMwnRyOkRn5eKLBzm6L82i0">
-            Открыть альбом
-        </a>
+        <div class="card-actions">
+            <a class="button" href="http://178.141.247.198:2283/share/5MaBZ2kcqu_fl0pMOha7duNs0ZgAlGs1LM_VMT4_srdzZMwnRyOkRn5eKLBzm6L82i0">
+                <img class="btn-icon" src="11040.png" alt="Immich">
+                Открыть альбом
+            </a>
+            <a class="icon-btn" href="#" title="Google Фото">
+                <img src="11046.png" alt="Google Фото">
+            </a>
+            <a class="icon-btn" href="#" title="Telegram">
+                <img src="11043.png" alt="Telegram">
+            </a>
+        </div>
     </div>
 </div>
 
@@ -192,9 +266,18 @@ footer {
             📅 14 Июня 2020<br>
             📍 Кировская область, Фаленский район, урочище Чуваши<br>
         </div>
-        <a class="button" href="http://178.141.247.198:2283/share/0J5RR7tm5z7Nh6pKbW_aiNyz_lkZiHpAQQJ_d13hZDD3GI_al33R2i7b0a4JRSuk7Y0">
-            Открыть альбом
-        </a>
+        <div class="card-actions">
+            <a class="button" href="http://178.141.247.198:2283/share/0J5RR7tm5z7Nh6pKbW_aiNyz_lkZiHpAQQJ_d13hZDD3GI_al33R2i7b0a4JRSuk7Y0">
+                <img class="btn-icon" src="11040.png" alt="Immich">
+                Открыть альбом
+            </a>
+            <a class="icon-btn" href="#" title="Google Фото">
+                <img src="11046.png" alt="Google Фото">
+            </a>
+            <a class="icon-btn" href="#" title="Telegram">
+                <img src="11043.png" alt="Telegram">
+            </a>
+        </div>
     </div>
 </div>
 
@@ -207,9 +290,18 @@ footer {
             📍 Кировская область, Фаленский район, урочище Чуваши<br>
         </div>
         <p>Семейный поход на тракторе</p>
-        <a class="button" href="http://178.141.247.198:2283/share/0J5RR7tm5z7Nh6pKbW_aiNyz_lkZiHpAQQJ_d13hZDD3GI_al33R2i7b0a4JRSuk7Y0">
-            Открыть альбом
-        </a>
+        <div class="card-actions">
+            <a class="button" href="http://178.141.247.198:2283/share/0J5RR7tm5z7Nh6pKbW_aiNyz_lkZiHpAQQJ_d13hZDD3GI_al33R2i7b0a4JRSuk7Y0">
+                <img class="btn-icon" src="11040.png" alt="Immich">
+                Открыть альбом
+            </a>
+            <a class="icon-btn" href="#" title="Google Фото">
+                <img src="11046.png" alt="Google Фото">
+            </a>
+            <a class="icon-btn" href="#" title="Telegram">
+                <img src="11043.png" alt="Telegram">
+            </a>
+        </div>
     </div>
 </div>
 
