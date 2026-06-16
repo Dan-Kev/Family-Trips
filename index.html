@@ -72,11 +72,12 @@ header {
     display: flex;
     gap: 10px;
     margin-bottom: 18px;
-    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
 .sort-btn {
+    flex: 1;
     padding: 9px 18px;
     border: 2px solid var(--accent);
     background: transparent;
@@ -86,6 +87,7 @@ header {
     cursor: pointer;
     transition: background 0.18s, color 0.18s;
     font-family: Arial, sans-serif;
+    text-align: center;
 }
 
 .sort-btn:hover,
@@ -161,8 +163,7 @@ footer {
 
 <!-- Кнопки сортировки -->
 <div class="toolbar">
-    <button class="sort-btn active" data-sort="default">По умолчанию</button>
-    <button class="sort-btn" data-sort="newest">Сначала новые</button>
+    <button class="sort-btn active" data-sort="newest">Сначала новые</button>
     <button class="sort-btn" data-sort="oldest">Сначала старые</button>
 </div>
 
@@ -174,8 +175,7 @@ footer {
         <h2>Чаруши 2005</h2>
         <div class="meta">
             📅 Лето 2005<br>
-            📍 Кировская область, Фаленский район, деревня Чаруши<br>
-            📷 ? фото • 🎥 0 видео
+            📍 Кировская область, Фаленский район, деревня Чаруши
         </div>
         <p>Семейный поход на тракторе</p>
         <a class="button" href="http://178.141.247.198:2283/share/5MaBZ2kcqu_fl0pMOha7duNs0ZgAlGs1LM_VMT4_srdzZMwnRyOkRn5eKLBzm6L82i0">
@@ -345,9 +345,6 @@ footer {
     const grid    = document.getElementById('album-grid');
     const buttons = document.querySelectorAll('.sort-btn');
 
-    /* Запоминаем исходный порядок */
-    const originalOrder = Array.from(grid.querySelectorAll('.card'));
-
     function sortCards(order) {
         const cards = Array.from(grid.querySelectorAll('.card'));
 
@@ -356,19 +353,19 @@ footer {
             const yb = parseInt(b.dataset.year, 10);
             if (order === 'newest') return yb - ya;
             if (order === 'oldest') return ya - yb;
-            return 0; /* default — восстановим из originalOrder */
+            return 0;
         });
-
-        /* При «по умолчанию» восстанавливаем оригинальный порядок */
-        const sorted = order === 'default' ? originalOrder : cards;
 
         /* Анимированная замена */
         grid.style.opacity = '0';
         setTimeout(() => {
-            sorted.forEach(c => grid.appendChild(c));
+            cards.forEach(c => grid.appendChild(c));
             grid.style.opacity = '1';
         }, 200);
     }
+
+    /* Применяем начальную сортировку */
+    sortCards('newest');
 
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
