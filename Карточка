@@ -1,0 +1,24 @@
+<div class="card" data-year="2020">
+    <img src="Chyvashi2020.JPG" alt="">
+    <div class="content">
+        <h2>Чуваши 2020</h2>
+        <div class="meta">
+            📅 14 Июня 2020<br>
+            📍 Кировская область, Фаленский район, урочище Чуваши<br>
+        </div>
+        <div class="card-actions">
+            <a class="button" href="http://178.141.247.198:2283/share/0J5RR7tm5z7Nh6pKbW_aiNyz_lkZiHpAQQJ_d13hZDD3GI_al33R2i7b0a4JRSuk7Y0">
+                <img class="btn-icon" src="icon_immich.png" alt="Immich">
+                Открыть альбом
+            </a>
+            <div class="icon-btns">
+                <a class="icon-btn" href="https://photos.app.goo.gl/ServbrWrGrCuh25p9" title="Google Фото">
+                    <img src="icon_gf.png" alt="Google Фото">
+                </a>
+                <a class="icon-btn" href="https://t.me/c/2665691578/440" title="Telegram">
+                    <img src="icon_tg.png" alt="Telegram">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
