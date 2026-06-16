@@ -1,22 +1,22 @@
-<!-- Карточка  №3 "###"-->
-<div class="card" data-year="2020">
-    <img src="Chyvashi2020.JPG" alt="">
+<!-- Карточка  №3 "?????"-->
+<div class="card" data-year="??год??">
+    <img src="????.jpg" alt="">
     <div class="content">
-        <h2>###</h2>
+        <h2>??Название??</h2>
         <div class="meta">
-            📅 ###<br>
-            📍 ###<br>
+            📅 ??Дата??<br>
+            📍 ??место??<br>
         </div>
         <div class="card-actions">
-            <a class="button" href="http://###">
+            <a class="button" href=" ??http?? ">
                 <img class="btn-icon" src="icon_immich.png" alt="Immich">
                 Открыть альбом
             </a>
             <div class="icon-btns">
-                <a class="icon-btn" href="https://###" title="Google Фото">
+                <a class="icon-btn" href=" ??http?? " title="Google Фото">
                     <img src="icon_gf.png" alt="Google Фото">
                 </a>
-                <a class="icon-btn" href="https://#" title="Telegram">
+                <a class="icon-btn" href=" ??https?? " title="Telegram">
                     <img src="icon_tg.png" alt="Telegram">
                 </a>
             </div>
