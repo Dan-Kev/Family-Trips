@@ -330,9 +330,10 @@ display:flex;
 align-items:center;
 justify-content:center;
 border-radius:50%;
-font-size:18px;
+font-size:20px;
+overflow:hidden;
 }
-.theme-toggle .theme-text{
+.theme-toggle #theme-text{
 display:none!important;
 }
 }
@@ -355,7 +356,7 @@ display:none!important;
     
     <!-- Переключатель темы -->
     <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
-        <span id="theme-icon">☀️</span>
+        <span id="theme-icon" style="display:block;line-height:1;">☀️</span>
         <span id="theme-text">Светлая</span>
     </button>
 </header>
