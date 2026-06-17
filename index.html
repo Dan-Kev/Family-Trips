@@ -11,6 +11,7 @@
     --card: #ffffff;
     --text: #222;
     --accent: #2d6a4f;
+    --meta: #666;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,7 +19,16 @@
         --bg: #111;
         --card: #1b1b1b;
         --text: #f0f0f0;
+        --meta: #aaa;
     }
+}
+
+/* Темная тема принудительно */
+html.dark {
+    --bg: #111;
+    --card: #1b1b1b;
+    --text: #f0f0f0;
+    --meta: #aaa;
 }
 
 body {
@@ -27,6 +37,7 @@ body {
     color: var(--text);
     font-family: Arial, sans-serif;
     overflow-x: hidden;
+    transition: background 0.3s ease;
 }
 
 /* ───── ЛИСТЬЯ ───── */
@@ -88,6 +99,35 @@ header {
     font-style: italic;
 }
 
+/* Переключатель темы */
+.theme-toggle {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: var(--card);
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.theme-toggle:hover {
+    background: var(--accent);
+    color: white;
+}
+
+.theme-toggle span {
+    font-weight: 600;
+}
+
 /* ── Телефон: эмблема сверху по центру, текст снизу ── */
 @media (max-width: 700px) {
     header {
@@ -105,6 +145,12 @@ header {
     }
     .header-text h1 {
         font-size: 26px;
+    }
+    .theme-toggle {
+        top: 20px;
+        right: 20px;
+        padding: 6px 10px;
+        font-size: 13px;
     }
 }
 
@@ -153,8 +199,12 @@ header {
     transition: none;
 }
 
-@media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1024px) { 
+    .grid { grid-template-columns: repeat(2, 1fr); } 
+}
+@media (max-width: 600px)  { 
+    .grid { grid-template-columns: repeat(2, 1fr); } 
+}
 
 .card {
     background: var(--card);
@@ -165,7 +215,9 @@ header {
     box-sizing: border-box;
 }
 
-.card:hover { transform: translateY(-4px); }
+.card:hover { 
+    transform: translateY(-4px); 
+}
 
 .card img {
     width: 100%;
@@ -173,10 +225,13 @@ header {
     object-fit: cover;
 }
 
-.content { padding: 15px; box-sizing: border-box; }
+.content { 
+    padding: 15px; 
+    box-sizing: border-box; 
+}
 
 .meta {
-    color: gray;
+    color: var(--meta);
     font-size: 14px;
 }
 
@@ -264,6 +319,12 @@ footer {
             <h1>Семейные Кемпинги</h1>
         </div>
     </div>
+    
+    <!-- Переключатель темы -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <span id="theme-icon">☀️</span>
+        <span id="theme-text">Светлая</span>
+    </button>
 </header>
 
 <div class="container">
@@ -275,7 +336,6 @@ footer {
 </div>
 
 <div class="grid" id="album-grid">
-
 
 <!--"Чуваши 2005"-->
 <div class="card" data-date="2005-07-15">
@@ -555,7 +615,6 @@ footer {
     const MAX_LEAVES = 22;
     const leaves = [];
 
-    /* Цвета берёзовых листьев (светло-зелёные / осенние жёлтые) */
     const COLORS = [
         '#a8d568', '#b8dd72', '#c8e87a',
         '#d4ee80', '#e2f590',
@@ -569,22 +628,15 @@ footer {
     window.addEventListener('resize', resize);
     resize();
 
-    /* Рисуем берёзовый лист через кривые Безье */
     function drawBirchLeaf(ctx, size) {
         ctx.beginPath();
-        /* Форма: заострённый ромб, ближе к берёзе */
-        ctx.moveTo(0, -size);                          /* верхушка */
-        ctx.bezierCurveTo( size * 0.8, -size * 0.3,
-                            size * 0.9,  size * 0.3,
-                            0,           size);         /* правый край */
-        ctx.bezierCurveTo(-size * 0.9,  size * 0.3,
-                          -size * 0.8, -size * 0.3,
-                           0,          -size);          /* левый край */
+        ctx.moveTo(0, -size);
+        ctx.bezierCurveTo(size * 0.8, -size * 0.3, size * 0.9, size * 0.3, 0, size);
+        ctx.bezierCurveTo(-size * 0.9, size * 0.3, -size * 0.8, -size * 0.3, 0, -size);
         ctx.closePath();
 
-        /* Прожилки */
         ctx.moveTo(0, -size);
-        ctx.lineTo(0,  size);
+        ctx.lineTo(0, size);
         for (let i = -0.6; i <= 0.6; i += 0.3) {
             ctx.moveTo(0, size * i);
             ctx.lineTo(size * 0.55, size * (i + 0.2));
@@ -610,10 +662,9 @@ footer {
         };
     }
 
-    /* Заполняем экран с самого начала */
     for (let i = 0; i < MAX_LEAVES; i++) {
         const l = makeLeaf();
-        l.y = Math.random() * window.innerHeight; /* стартуют по всей высоте */
+        l.y = Math.random() * window.innerHeight;
         leaves.push(l);
     }
 
@@ -628,7 +679,6 @@ footer {
             l.y     += l.speedY;
             l.angle += l.spinSpeed;
 
-            /* Переносим упавший лист наверх */
             if (l.y > canvas.height + 40) {
                 leaves[i] = makeLeaf();
                 continue;
@@ -639,12 +689,10 @@ footer {
             ctx.rotate(l.angle);
             ctx.globalAlpha = l.opacity;
 
-            /* Заливка */
             ctx.fillStyle = l.color;
             drawBirchLeaf(ctx, l.size);
             ctx.fill();
 
-            /* Прожилки */
             ctx.strokeStyle = 'rgba(0,0,0,0.18)';
             ctx.lineWidth = 0.6;
             drawBirchLeaf(ctx, l.size);
@@ -656,12 +704,10 @@ footer {
         requestAnimationFrame(tick);
     }
 
-    /* Уважаем prefers-reduced-motion */
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         tick();
     }
 })();
-
 
 /* ═══════════════════════════════════════════
    СОРТИРОВКА АЛЬБОМОВ ПО ДАТЕ
@@ -686,7 +732,6 @@ footer {
             return 0;
         });
 
-        /* Анимированная замена */
         grid.style.opacity = '0';
         setTimeout(() => {
             cards.forEach(c => grid.appendChild(c));
@@ -694,7 +739,6 @@ footer {
         }, 200);
     }
 
-    /* Применяем начальную сортировку */
     sortCards('newest');
 
     buttons.forEach(btn => {
@@ -705,8 +749,54 @@ footer {
         });
     });
 
-    /* CSS-переход для плавного появления */
     grid.style.transition = 'opacity 0.2s ease';
+})();
+
+/* ═══════════════════════════════════════════
+   ПЕРЕКЛЮЧАТЕЛЬ СВЕТЛОЙ/ТЁМНОЙ ТЕМЫ
+═══════════════════════════════════════════ */
+(function () {
+    const toggleBtn = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-icon');
+    const text = document.getElementById('theme-text');
+    const html = document.documentElement;
+
+    function setTheme(theme) {
+        if (theme === 'dark') {
+            html.classList.add('dark');
+            icon.textContent = '🌙';
+            text.textContent = 'Тёмная';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            html.classList.remove('dark');
+            icon.textContent = '☀️';
+            text.textContent = 'Светлая';
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    // Определяем начальную тему
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else {
+        // Если нет сохранённой темы — следуем системной
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(prefersDark ? 'dark' : 'light');
+    }
+
+    // Обработчик клика
+    toggleBtn.addEventListener('click', () => {
+        const isDark = html.classList.contains('dark');
+        setTheme(isDark ? 'light' : 'dark');
+    });
+
+    // Следим за изменениями системной темы (если пользователь не выбрал вручную)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            setTheme(e.matches ? 'dark' : 'light');
+        }
+    });
 })();
 </script>
 
