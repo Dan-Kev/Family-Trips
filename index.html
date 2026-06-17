@@ -15,7 +15,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
+    html:not(.light):not(.dark) {
         --bg: #111;
         --card: #1b1b1b;
         --text: #f0f0f0;
@@ -24,6 +24,21 @@
 }
 
 /* Темная тема принудительно */
+html.dark {
+    --bg: #111;
+    --card: #1b1b1b;
+    --text: #f0f0f0;
+    --meta: #aaa;
+}
+
+/* Светлая тема принудительно */
+html.light {
+    --bg: #f5f5f5;
+    --card: #ffffff;
+    --text: #222;
+    --meta: #666;
+}
+
 html.dark {
     --bg: #111;
     --card: #1b1b1b;
@@ -763,12 +778,14 @@ footer {
 
     function setTheme(theme) {
         if (theme === 'dark') {
+            html.classList.remove('light');
             html.classList.add('dark');
             icon.textContent = '🌙';
             text.textContent = 'Тёмная';
             localStorage.setItem('theme', 'dark');
         } else {
             html.classList.remove('dark');
+            html.classList.add('light');
             icon.textContent = '☀️';
             text.textContent = 'Светлая';
             localStorage.setItem('theme', 'light');
